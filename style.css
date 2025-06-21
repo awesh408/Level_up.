@@ -1,0 +1,89 @@
+
+body {
+  background-color: #05050a;
+  font-family: 'Segoe UI', sans-serif;
+  color: #00eaff;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  padding: 20px;
+  text-align: center;
+}
+.status-title {
+  font-size: 22px;
+  color: #00eaff;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+.level-box {
+  font-size: 40px;
+  color: #00eaff;
+  margin-bottom: 15px;
+}
+.level-label {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.info-box, .stats-box {
+  border: 1px solid #00eaff;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.label {
+  font-weight: bold;
+}
+.description {
+  margin-top: 8px;
+  font-style: italic;
+}
+.stats-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  font-size: 18px;
+}
+.nav {
+  margin-top: 30px;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #00eaff;
+  padding-top: 10px;
+  color: #00eaff;
+}
+.quest-list {
+  list-style: none;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.quest-list li {
+  margin-bottom: 10px;
+}
+.leaderboard {
+  text-align: left;
+  max-width: 300px;
+  margin: auto;
+}
+textarea {
+  width: 80%;
+  height: 60px;
+  margin: 10px auto;
+  display: block;
+}
+button {
+  background-color: #00eaff;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.nav-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #00eaff;
+  text-decoration: none;
+}

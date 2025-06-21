@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The System - AI Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="status-title">AI TRAINER</h1>
+    <p>Ask the AI Trainer for workout or motivation tips:</p>
+    <textarea id="question" placeholder="What should I eat after workout?"></textarea>
+    <button onclick="getAdvice()">Ask</button>
+    <p id="answer">🤖 Awaiting your command...</p>
+    <a class="nav-link" href="index.html">⬅ Back to Status</a>
+  </div>
+  <script>
+    function getAdvice() {
+      const q = document.getElementById("question").value.toLowerCase();
+      let a = "Train hard, rest harder!";
+      if (q.includes("eat")) a = "Eat protein-rich foods like eggs, chicken, or tofu.";
+      else if (q.includes("motivation")) a = "You either level up, or stay weak. Choose.";
+      else if (q.includes("rest")) a = "Sleep at least 7-8 hours for recovery.";
+      document.getElementById("answer").innerText = "🤖 " + a;
+    }
+  </script>
+</body>
+</html>
