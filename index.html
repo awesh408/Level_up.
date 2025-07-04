@@ -1,35 +1,140 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>The System - Status</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #222;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #333;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="status-title">THE SYSTEM</h1>
-    <div class="level-box">
-      <span class="level-number" id="level">15</span>
-      <span class="level-label">LEVEL</span>
-    </div>
-    <div class="info-box">
-      <p><span class="label">JOB:</span> Human</p>
-      <p><span class="label">TITLE:</span> HR</p>
-      <p class="description">Low human strength.</p>
-    </div>
-    <div class="stats-box">
-      <div><span>💪 STR:</span> <span id="str">17</span></div>
-      <div><span>🧠 INT:</span> <span id="int">11</span></div>
-      <div><span>🏃 AGI:</span> <span id="agi">12</span></div>
-      <div><span>❤️ VIT:</span> <span id="vit">16</span></div>
-    </div>
-    <div class="nav">
-      <a href="quests.html">📜</a>
-      <a href="trainer.html">🤖</a>
-      <a href="leaderboard.html">🏆</a>
-    </div>
-  </div>
+  <h1>Tic Tac Toe</h1>
+  <div id="board"></div>
+  <div id="status">Player X's turn</div>
+  <button onclick="resetGame()">Restart</button>
+
+  <script>
+    const board = document.getElementById("board");
+    const statusDiv = document.getElementById("status");
+
+    let currentPlayer = "X";
+    let gameActive = true;
+    let gameState = Array(9).fill("");
+
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6]
+    ];
+
+    function checkWinner() {
+      for (let pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+          gameActive = false;
+          statusDiv.textContent = `🎉 Player ${gameState[a]} wins!`;
+          return;
+        }
+      }
+      if (!gameState.includes("")) {
+        gameActive = false;
+        statusDiv.textContent = "It's a draw!";
+      }
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (!gameActive || gameState[index] !== "") return;
+
+      gameState[index] = currentPlayer;
+      e.target.textContent = currentPlayer;
+
+      checkWinner();
+
+      if (gameActive) {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        statusDiv.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function renderBoard() {
+      board.innerHTML = "";
+      gameState.forEach((cell, index) => {
+        const div = document.createElement("div");
+        div.classList.add("cell");
+        div.dataset.index = index;
+        div.textContent = cell;
+        div.addEventListener("click", handleClick);
+        board.appendChild(div);
+      });
+    }
+
+    function resetGame() {
+      currentPlayer = "X";
+      gameActive = true;
+      gameState = Array(9).fill("");
+      statusDiv.textContent = "Player X's turn";
+      renderBoard();
+    }
+
+    renderBoard();
+  </script>
 </body>
 </html>
